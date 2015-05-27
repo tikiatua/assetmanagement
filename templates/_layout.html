@@ -1,0 +1,10 @@
+{# the following code will be included in the default settings template which extends _layout/cp #}
+{% extends '_layouts/cp' %}
+
+{% set title = craft.assetManagement.name %}
+
+{% set tabs = {
+	reports:       { label: "Protokoll"|t, url: url('assetmanagement/index')},
+	publicAccess:  { label: "Zugangsberechtigungen"|t, url: url('assetmanagement/access') },
+	settings: { label: "Einstellungen"|t, url: url('assetmanagement/settings') }
+} %}

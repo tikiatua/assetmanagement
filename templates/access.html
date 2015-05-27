@@ -1,0 +1,41 @@
+{% extends "assetmanagement/_layout"  %}
+{% import '_includes/forms' as forms %}
+
+{% set selectedTab = 'publicAccess' %}
+
+{% set content %}
+
+	<form id="mailerform" method="post" action="" class="grid" accept-charset="UTF-8" data-saveshortcut="1">
+		{{ getCsrfInput() }}
+		<input type="hidden" name="action" value="assetManagement/admin/setAccess">
+
+		{% set assetSources = craft.assetManagement.localAssetSources %}
+		{% set currentlyPubliclyAccessible = craft.assetManagement.currentlyPubliclyAccessible %}
+
+		<div class="field">
+			<div class="heading">
+				<label for="publicAccess">{{ "Öffentlichen Zugang zu Dateien in den folgenden Ordnern erlauben"|t }}</label>
+				<div class="instructions">
+					<p>{{ "Alle Dateien in den ausgewählten Ordnern werden für alle Benutzer zugänglich gemacht"|t  }}</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="field">
+
+			{{ forms.checkboxGroup({
+				name: 'publicAccess',
+				options: assetSources,
+				values: currentlyPubliclyAccessible
+			}) }}
+
+		</div>
+
+		<hr>
+
+		<input class="btn submit" type="submit" value="{{ "Zugangsberechtigungen speichern"|t }}">
+
+	</form>
+
+
+{% endset %}

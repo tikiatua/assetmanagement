@@ -1,0 +1,71 @@
+{% extends "assetmanagement/_layout"  %}
+{% import '_includes/forms' as forms %}
+
+{% set selectedTab = 'settings' %}
+
+{% set content %}
+
+	<form method="post" action="" accept-charset="UTF-8" data-saveshortcut="">
+
+		{{ getCsrfInput() }}
+		<input type="hidden" name="action" value="plugins/savePluginSettings">
+		<input type="hidden" name="pluginClass" value="AssetManagement">
+		<input type="hidden" name="redirect" value="assetmanagement/settings">
+
+		{% set settings = craft.assetManagement.settings %}
+
+		{% namespace 'settings' %}
+			{{  forms.textField({
+				first: true,
+				label: "Plugin Name"|t,
+				instructions: "Name of the plugin in the control panel"|t,
+				id: 'pluginName',
+				name: 'pluginName',
+				value: settings.pluginName,
+				required: true
+			})}}
+
+			<hr>
+
+			{{ forms.lightswitchField({
+				label: "Dateinamen url konform machen "|t,
+				instructions: "Falls diese Option eingeschaltet ist, so werden alle Dateinamen klein-geschrieben und Sonderzeichen entfernt"|t,
+				id: 'sanitizeFilenames',
+				name: 'sanitizeFilenames',
+				on: settings.sanitizeFilenames
+			})}}
+
+			{{ forms.lightswitchField({
+				label: "Zeitstempel zu Dateinamen hinzufügen"|t,
+				instructions: "Falls diese Option eingeschaltet ist, so wird zu jedem Dateinamen ein Zeitspempel hinzugefügt"|t,
+				id: 'addTimestampToFilename',
+				name: 'addTimestampToFilename',
+				on: settings.addTimestampToFilename
+			})}}
+
+			<hr>
+
+			{{ forms.lightswitchField({
+				label: "Ersetzen von Dateien verhindern"|t,
+				instructions: "Falls diese Option eingeschaltet ist, so können Dateien nicht mehr überschrieben werden"|t,
+				id: 'preventFileReplacement',
+				name: 'preventFileReplacement',
+				on: settings.preventFileReplacement
+			})}}
+
+			{{ forms.textField({
+				label: "Fehlermeldung falls eine Datei überschrieben werden soll"|t,
+				instructions: "Wird nur benötigt, falls die Option 'Ersetzen von Dateien' aktiviert ist"|t,
+				id: 'replacementErrorMessage',
+				name: 'replacementErrorMessage',
+				value: settings.replacementErrorMessage
+			})}}
+		{% endnamespace %}
+
+		<hr>
+
+		<input class="btn submit" type="submit" value="Einstellungen speichern">
+
+	</form>
+
+{% endset %}

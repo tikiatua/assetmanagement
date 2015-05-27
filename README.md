@@ -1,5 +1,7 @@
 # Craft CMS: Asset Management Plugin #
 
+## Please be aware that this plugin is currently in beta. It might not work for your setup without additional tweaks, although we already use it on a daily basis in production on one of our systems.
+
 ## Description
 This plugin will help you to restrict access to assets for permitted users only. Access to a given asset is only granted if one of the following conditions is met:
 
